@@ -10,13 +10,17 @@
   },
   "scripts": {
     "start": "node -r ./tracing.js index.js",
-    "start:local": "OTEL_EXPORTER_OTLP_ENDPOINT=\"http://localhost:4317\" OTEL_RESOURCE_ATTRIBUTES=service.name=node-js-sample-app node -r ./tracing.js index.js"
+    "start:local": "OTEL_RESOURCE_ATTRIBUTES=service.name=order_svc node -r ./tracing.js index.js",
+    "baselime": "OTEL_LOG_LEVEL=DEBUG BASELIME_OTEL_KEY=W8nomdwXijaIrfnjAuwkM3iunYOZCgibaiz8rLHJ BASELIME_NAMESPACE=order_svc node --require @baselime/lambda-node-opentelemetry index.js"
   },
   "dependencies": {
+    "@aspecto/opentelemetry": "^0.0.140",
+    "@baselime/lambda-node-opentelemetry": "^0.0.10",
     "@opentelemetry/api": "^1.4.1",
     "@opentelemetry/auto-instrumentations-node": "^0.36.6",
     "@opentelemetry/exporter-trace-otlp-http": "^0.38.0",
     "@opentelemetry/sdk-node": "^0.38.0",
+    "axios": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "nodemon": "^2.0.15"

@@ -8,7 +8,10 @@ const { Resource } = require('@opentelemetry/resources');
 const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
 
 const exporterOptions = {
-  url: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || 'http://stagingapp.signoz.io:4318/v1/traces',
+  url: 'https://otelcol.aspecto.io/v1/traces',
+  headers: {
+    'Authorization': "d1df3820-fcef-493e-8e93-8ea76fed85f5"
+  },
 }
 
 const traceExporter = new OTLPTraceExporter(exporterOptions);
@@ -16,7 +19,7 @@ const sdk = new opentelemetry.NodeSDK({
   traceExporter,
   instrumentations: [getNodeAutoInstrumentations()],
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'node_app'
+    [SemanticResourceAttributes.SERVICE_NAME]: 'order_svc'
   })
 });
 
